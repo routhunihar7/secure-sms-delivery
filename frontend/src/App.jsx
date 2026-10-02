@@ -16,7 +16,7 @@ import NetworkDemoPage from './pages/NetworkDemoPage';
 
 function AppLayout({ children, onOpenSimulator }) {
   return (
-    <div className="min-h-screen flex flex-col bg-slate-950 text-slate-100 selection:bg-teal-500 selection:text-white transition-colors duration-200">
+    <div className="min-h-screen flex flex-col bg-[#060813] text-slate-100 selection:bg-brand-500/30 selection:text-brand-200 transition-colors duration-200 relative overflow-x-hidden">
       <Navbar onOpenSimulator={onOpenSimulator} />
       <main className="flex-1 flex flex-col">
         {children}

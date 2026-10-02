@@ -136,33 +136,33 @@ export default function HistoryPage({ onOpenSimulator }) {
       />
 
       {/* Header */}
-      <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 pb-4 border-b border-slate-800">
+      <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 pb-4 border-b border-white/[0.08]">
         <div>
-          <h2 className="text-2xl font-bold text-white flex items-center gap-2.5">
-            <History className="w-6 h-6 text-teal-400" />
-            <span>Message Delivery Log & Audit</span>
-          </h2>
-          <p className="text-xs text-slate-400 mt-1">
-            Track created secure links, recipient open states, expiration windows, and SMS dispatch status
+          <h1 className="text-2xl sm:text-3xl font-bold font-display text-white flex items-center gap-2.5">
+            <History className="w-6 h-6 text-brand-400" />
+            <span>Delivery Logs & Audit Trail</span>
+          </h1>
+          <p className="text-xs sm:text-sm text-slate-400 mt-1">
+            Monitor created secure links, recipient open states, expiration windows, and SMS status
           </p>
         </div>
 
-        <div className="flex items-center gap-2">
+        <div className="flex items-center gap-2.5">
           <button
             onClick={fetchMessages}
             disabled={loading}
-            className="flex items-center gap-1.5 px-3 py-2 rounded-xl bg-slate-900 border border-slate-800 text-slate-300 hover:text-white hover:border-slate-700 text-xs font-semibold transition-all"
+            className="flex items-center gap-1.5 px-3.5 py-2 rounded-xl bg-white/[0.05] border border-white/[0.08] text-slate-300 hover:text-white hover:bg-white/[0.08] text-xs font-semibold transition-all"
           >
-            <RefreshCw className={`w-3.5 h-3.5 ${loading ? 'animate-spin text-teal-400' : ''}`} />
+            <RefreshCw className={`w-3.5 h-3.5 ${loading ? 'animate-spin text-brand-400' : ''}`} />
             <span>Refresh</span>
           </button>
 
           <button
             onClick={onOpenSimulator}
-            className="flex items-center gap-1.5 px-3.5 py-2 rounded-xl bg-amber-500/10 border border-amber-500/20 text-amber-400 hover:bg-amber-500/20 text-xs font-semibold transition-all"
+            className="flex items-center gap-1.5 px-3.5 py-2 rounded-xl bg-brand-500/15 border border-brand-500/30 text-brand-300 hover:bg-brand-500/25 text-xs font-semibold transition-all"
           >
-            <Smartphone className="w-3.5 h-3.5" />
-            <span>Mock SMS Device</span>
+            <Smartphone className="w-3.5 h-3.5 text-brand-400" />
+            <span>Mock Inbox</span>
           </button>
         </div>
       </div>
@@ -174,19 +174,19 @@ export default function HistoryPage({ onOpenSimulator }) {
         <form onSubmit={handleSearchSubmit} className="md:col-span-7 flex gap-2">
           <div className="relative flex-1">
             <div className="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-slate-500">
-              <Search className="w-4 h-4" />
+              <Search className="w-4 h-4 text-brand-400" />
             </div>
             <input
               type="text"
               value={search}
               onChange={(e) => setSearch(e.target.value)}
-              placeholder="Search by phone number (+1...) or message title..."
+              placeholder="Search by phone number (+91...) or message title..."
               className="glass-input w-full pl-10 text-xs"
             />
           </div>
           <button
             type="submit"
-            className="px-4 py-2 rounded-xl bg-teal-600 hover:bg-teal-500 text-white text-xs font-bold transition-colors"
+            className="px-4 py-2 rounded-xl bg-brand-600 hover:bg-brand-500 text-white text-xs font-bold transition-colors shadow-md shadow-brand-500/20"
           >
             Search
           </button>
@@ -210,8 +210,8 @@ export default function HistoryPage({ onOpenSimulator }) {
               }}
               className={`px-3 py-2 rounded-xl text-xs font-semibold whitespace-nowrap transition-all ${
                 statusFilter === tab.id
-                  ? 'bg-teal-500/20 text-teal-400 border border-teal-500/40 shadow-sm'
-                  : 'bg-slate-900/60 text-slate-400 border border-slate-800/80 hover:text-slate-200'
+                  ? 'bg-brand-500/20 text-brand-200 border border-brand-500/40 shadow-sm'
+                  : 'bg-dark-900/60 text-slate-400 border border-white/[0.08] hover:text-slate-200'
               }`}
             >
               {tab.label}
@@ -222,25 +222,25 @@ export default function HistoryPage({ onOpenSimulator }) {
       </div>
 
       {/* Messages Table */}
-      <div className="glass-panel rounded-2xl overflow-hidden shadow-2xl border border-slate-800">
+      <div className="glass-panel rounded-3xl overflow-hidden shadow-2xl border-white/[0.08]">
         <div className="overflow-x-auto">
           <table className="w-full text-left text-xs border-collapse">
             <thead>
-              <tr className="border-b border-slate-800 bg-slate-950/60 text-slate-400 font-semibold uppercase tracking-wider">
+              <tr className="border-b border-white/[0.08] bg-dark-950/80 text-slate-400 font-semibold uppercase tracking-wider">
                 <th className="py-3.5 px-4">Recipient Phone</th>
                 <th className="py-3.5 px-4">Title & Preview</th>
                 <th className="py-3.5 px-4">SMS Status</th>
-                <th className="py-3.5 px-4">Link State</th>
+                <th className="py-3.5 px-4">Vault State</th>
                 <th className="py-3.5 px-4">Expiration</th>
                 <th className="py-3.5 px-4">Created</th>
                 <th className="py-3.5 px-4 text-right">Actions</th>
               </tr>
             </thead>
-            <tbody className="divide-y divide-slate-800/60 text-slate-300">
+            <tbody className="divide-y divide-white/[0.06] text-slate-300">
               {loading ? (
                 <tr>
                   <td colSpan="7" className="py-12 text-center text-slate-500 font-medium">
-                    <div className="w-6 h-6 border-2 border-teal-500 border-t-transparent rounded-full animate-spin mx-auto mb-2" />
+                    <div className="w-6 h-6 border-2 border-brand-500 border-t-transparent rounded-full animate-spin mx-auto mb-2" />
                     Loading delivery records...
                   </td>
                 </tr>
@@ -258,10 +258,10 @@ export default function HistoryPage({ onOpenSimulator }) {
                   const isRevoked = !item.isActive;
 
                   return (
-                    <tr key={item.id} className="hover:bg-slate-800/40 transition-colors">
+                    <tr key={item.id} className="hover:bg-white/[0.03] transition-colors">
                       
                       {/* Phone */}
-                      <td className="py-3.5 px-4 font-mono font-medium text-teal-400 whitespace-nowrap">
+                      <td className="py-3.5 px-4 font-mono font-medium text-brand-300 whitespace-nowrap">
                         {item.recipientPhoneMasked}
                       </td>
 
@@ -274,22 +274,22 @@ export default function HistoryPage({ onOpenSimulator }) {
                       {/* SMS Status */}
                       <td className="py-3.5 px-4 whitespace-nowrap">
                         {item.smsStatus === 'sent' && (
-                          <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[10px] font-semibold bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">
+                          <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-[10px] font-semibold bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">
                             <CheckCircle2 className="w-3 h-3" /> Twilio Live
                           </span>
                         )}
                         {item.smsStatus === 'mock_sent' && (
-                          <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[10px] font-semibold bg-amber-500/10 text-amber-400 border border-amber-500/20">
+                          <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-[10px] font-semibold bg-amber-500/10 text-amber-400 border border-amber-500/20">
                             <Smartphone className="w-3 h-3" /> Mock Sent
                           </span>
                         )}
                         {item.smsStatus === 'failed' && (
-                          <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[10px] font-semibold bg-rose-500/10 text-rose-400 border border-rose-500/20">
+                          <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-[10px] font-semibold bg-rose-500/10 text-rose-400 border border-rose-500/20">
                             <XCircle className="w-3 h-3" /> Failed
                           </span>
                         )}
                         {item.smsStatus === 'not_sent' && (
-                          <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[10px] font-semibold bg-slate-800 text-slate-400">
+                          <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-[10px] font-semibold bg-slate-800 text-slate-400">
                             Link Only
                           </span>
                         )}
@@ -298,19 +298,19 @@ export default function HistoryPage({ onOpenSimulator }) {
                       {/* Link State */}
                       <td className="py-3.5 px-4 whitespace-nowrap">
                         {isRevoked ? (
-                          <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[10px] font-semibold bg-rose-500/10 text-rose-400 border border-rose-500/20">
+                          <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-[10px] font-semibold bg-rose-500/10 text-rose-400 border border-rose-500/20">
                             Revoked
                           </span>
                         ) : isOpened ? (
-                          <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[10px] font-semibold bg-indigo-500/10 text-indigo-400 border border-indigo-500/20">
-                            <Eye className="w-3 h-3" /> {item.isOneTime ? 'Burned (Opened)' : `Opened (${item.viewCount})`}
+                          <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-[10px] font-semibold bg-brand-500/15 text-brand-300 border border-brand-500/25">
+                            <Eye className="w-3 h-3 text-brand-400" /> {item.isOneTime ? 'Burned' : `Opened (${item.viewCount})`}
                           </span>
                         ) : isExpired ? (
-                          <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[10px] font-semibold bg-slate-800 text-slate-400">
+                          <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-[10px] font-semibold bg-slate-800 text-slate-400">
                             Expired
                           </span>
                         ) : (
-                          <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[10px] font-semibold bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">
+                          <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-[10px] font-semibold bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">
                             Active
                           </span>
                         )}
@@ -318,14 +318,14 @@ export default function HistoryPage({ onOpenSimulator }) {
 
                       {/* Expiration */}
                       <td className="py-3.5 px-4 whitespace-nowrap text-slate-400">
-                        <div className="flex items-center gap-1">
+                        <div className="flex items-center gap-1 font-mono text-[11px]">
                           <Clock className="w-3 h-3 text-slate-500" />
                           <span>{new Date(item.expiresAt).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', month: 'short', day: 'numeric' })}</span>
                         </div>
                       </td>
 
                       {/* Created */}
-                      <td className="py-3.5 px-4 whitespace-nowrap text-slate-400">
+                      <td className="py-3.5 px-4 whitespace-nowrap text-slate-400 font-mono text-[11px]">
                         {new Date(item.createdAt).toLocaleDateString([], { month: 'short', day: 'numeric' })}
                       </td>
 
@@ -336,7 +336,7 @@ export default function HistoryPage({ onOpenSimulator }) {
                           {/* View details */}
                           <button
                             onClick={() => handleOpenDetailModal(item.id)}
-                            className="p-1.5 rounded-lg text-slate-400 hover:text-white hover:bg-slate-800 transition-colors"
+                            className="p-1.5 rounded-lg text-slate-400 hover:text-white hover:bg-white/[0.08] transition-colors"
                             title="View Full Details"
                           >
                             <FileText className="w-4 h-4" />
@@ -347,7 +347,7 @@ export default function HistoryPage({ onOpenSimulator }) {
                             <button
                               onClick={() => handleResendSMS(item)}
                               disabled={resendingId === item.id}
-                              className="p-1.5 rounded-lg text-teal-400 hover:text-teal-300 hover:bg-teal-500/10 transition-colors"
+                              className="p-1.5 rounded-lg text-brand-400 hover:text-brand-300 hover:bg-brand-500/10 transition-colors"
                               title="Resend SMS"
                             >
                               <Send className={`w-4 h-4 ${resendingId === item.id ? 'animate-spin' : ''}`} />
@@ -378,7 +378,7 @@ export default function HistoryPage({ onOpenSimulator }) {
 
         {/* Pagination Footer */}
         {pagination.pages > 1 && (
-          <div className="px-4 py-3 border-t border-slate-800 bg-slate-950/40 flex items-center justify-between text-xs text-slate-400">
+          <div className="px-4 py-3 border-t border-white/[0.08] bg-dark-950/60 flex items-center justify-between text-xs text-slate-400">
             <div>
               Showing Page <span className="font-semibold text-white">{pagination.page}</span> of{' '}
               <span className="font-semibold text-white">{pagination.pages}</span> ({pagination.total} total records)
@@ -387,14 +387,14 @@ export default function HistoryPage({ onOpenSimulator }) {
               <button
                 onClick={() => setPage((p) => Math.max(1, p - 1))}
                 disabled={page === 1}
-                className="p-1.5 rounded-lg bg-slate-900 border border-slate-800 disabled:opacity-40 text-slate-300 hover:text-white"
+                className="p-1.5 rounded-lg bg-dark-900 border border-white/[0.08] disabled:opacity-40 text-slate-300 hover:text-white"
               >
                 <ChevronLeft className="w-4 h-4" />
               </button>
               <button
                 onClick={() => setPage((p) => Math.min(pagination.pages, p + 1))}
                 disabled={page === pagination.pages}
-                className="p-1.5 rounded-lg bg-slate-900 border border-slate-800 disabled:opacity-40 text-slate-300 hover:text-white"
+                className="p-1.5 rounded-lg bg-dark-900 border border-white/[0.08] disabled:opacity-40 text-slate-300 hover:text-white"
               >
                 <ChevronRight className="w-4 h-4" />
               </button>
@@ -405,17 +405,17 @@ export default function HistoryPage({ onOpenSimulator }) {
 
       {/* Message Details Modal */}
       {selectedMessage && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-950/80 backdrop-blur-md animate-fade-in">
-          <div className="relative w-full max-w-lg bg-slate-900 border border-slate-800 rounded-2xl shadow-2xl p-6 overflow-hidden max-h-[90vh] overflow-y-auto">
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-dark-950/80 backdrop-blur-md animate-fade-in">
+          <div className="relative w-full max-w-lg glass-panel border border-white/[0.1] rounded-3xl shadow-2xl p-6 overflow-hidden max-h-[90vh] overflow-y-auto">
             
-            <div className="flex items-center justify-between pb-3 mb-4 border-b border-slate-800">
-              <h3 className="text-base font-bold text-white flex items-center gap-2">
-                <FileText className="w-4 h-4 text-teal-400" />
+            <div className="flex items-center justify-between pb-3 mb-4 border-b border-white/[0.08]">
+              <h3 className="text-base font-bold font-display text-white flex items-center gap-2">
+                <FileText className="w-4 h-4 text-brand-400" />
                 Delivery Audit Record
               </h3>
               <button
                 onClick={() => setSelectedMessage(null)}
-                className="p-1 text-slate-400 hover:text-white rounded-lg hover:bg-slate-800"
+                className="p-1 text-slate-400 hover:text-white rounded-lg hover:bg-white/[0.08]"
               >
                 <X className="w-5 h-5" />
               </button>
@@ -423,10 +423,10 @@ export default function HistoryPage({ onOpenSimulator }) {
 
             <div className="space-y-4 text-xs">
               
-              <div className="bg-slate-950/70 rounded-xl p-3.5 border border-slate-800 space-y-2 font-mono">
+              <div className="bg-dark-950/80 rounded-2xl p-4 border border-white/[0.08] space-y-2 font-mono">
                 <div className="flex justify-between">
                   <span className="text-slate-500">Recipient:</span>
-                  <span className="text-teal-400 font-bold">{selectedMessage.recipientPhoneMasked}</span>
+                  <span className="text-brand-300 font-bold">{selectedMessage.recipientPhoneMasked}</span>
                 </div>
                 <div className="flex justify-between">
                   <span className="text-slate-500">Title:</span>
@@ -434,7 +434,7 @@ export default function HistoryPage({ onOpenSimulator }) {
                 </div>
                 <div className="flex justify-between">
                   <span className="text-slate-500">Access Mode:</span>
-                  <span className="text-amber-400">{selectedMessage.isOneTime ? 'One-Time Self-Destruct' : 'Multi-View Time-Locked'}</span>
+                  <span className="text-amber-400">{selectedMessage.isOneTime ? 'One-Time Burn' : 'Time-Locked'}</span>
                 </div>
                 <div className="flex justify-between">
                   <span className="text-slate-500">SMS SID:</span>
@@ -448,26 +448,26 @@ export default function HistoryPage({ onOpenSimulator }) {
 
               <div>
                 <label className="font-semibold text-slate-300 block mb-1">Encrypted Payload Message:</label>
-                <div className="bg-slate-950/90 rounded-xl p-3 border border-slate-800 text-slate-200 whitespace-pre-wrap">
+                <div className="bg-dark-950/90 rounded-2xl p-3.5 border border-white/[0.08] text-slate-200 whitespace-pre-wrap font-mono">
                   {selectedMessage.message}
                 </div>
               </div>
 
               {selectedMessage.openedMeta && (
-                <div className="bg-indigo-500/10 border border-indigo-500/20 rounded-xl p-3 text-indigo-300 space-y-1">
-                  <div className="font-semibold text-indigo-200 flex items-center gap-1.5">
+                <div className="bg-brand-500/10 border border-brand-500/20 rounded-2xl p-3.5 text-brand-300 space-y-1">
+                  <div className="font-semibold text-brand-200 flex items-center gap-1.5">
                     <Eye className="w-3.5 h-3.5" />
                     Recipient Open Telemetry
                   </div>
                   <div>Opened At: {new Date(selectedMessage.openedAt).toLocaleString()}</div>
-                  <div className="truncate">User-Agent: {selectedMessage.openedMeta.userAgent}</div>
+                  <div className="truncate text-slate-400">User-Agent: {selectedMessage.openedMeta.userAgent}</div>
                 </div>
               )}
 
               <div className="pt-2 flex justify-end">
                 <button
                   onClick={() => setSelectedMessage(null)}
-                  className="py-2 px-4 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-200 font-semibold"
+                  className="py-2.5 px-4 rounded-xl bg-white/[0.08] hover:bg-white/[0.12] text-slate-200 font-semibold"
                 >
                   Close
                 </button>
